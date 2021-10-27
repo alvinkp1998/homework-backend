@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      models.Materials.belongsTo(models.Schedules);
+    static associate({ Materials, Schedules }) {
+      Materials.belongsTo(Schedules);
     }
   }
   Materials.init(
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       id: { type: DataTypes.STRING(36), primaryKey: true },
       name: DataTypes.STRING,
       file: DataTypes.STRING,
-      type: DataTypes.ENUM("Recording", "Material"),
+      type: DataTypes.ENUM(["Recording", "Material"]),
       scheduleId: DataTypes.STRING(36),
     },
     {

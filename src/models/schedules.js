@@ -7,10 +7,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      models.Schedules.belongsTo(models.Classes);
-      models.Schedules.hasMany(models.Presences);
-      models.Schedules.hasMany(models.Materials);
+    static associate({ Schedules, Classes, Presences, Materials }) {
+      Schedules.belongsTo(Classes);
+      Schedules.hasMany(Presences);
+      Schedules.hasMany(Materials);
     }
   }
   Schedules.init(

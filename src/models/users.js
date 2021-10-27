@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      models.Users.hasMany(models.Join_classes);
+    static associate({ Users, Join_classes }) {
+      Users.hasMany(Join_classes);
     }
   }
   Users.init(
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       fullName: DataTypes.STRING(50),
       placeBirth: DataTypes.STRING(100),
       birthdate: DataTypes.DATEONLY,
-      role: DataTypes.ENUM("Admin", "User"),
+      role: DataTypes.ENUM(["Admin", "User"]),
       email: DataTypes.STRING,
       password: {
         type: DataTypes.STRING,

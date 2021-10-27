@@ -7,9 +7,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      models.Presences.belongsTo(models.Join_classes);
-      models.Presences.belongsTo(models.Schedules);
+    static associate({ Presences, Join_classes, Schedules }) {
+      Presences.belongsTo(Join_classes);
+      Presences.belongsTo(Schedules);
     }
   }
   Presences.init(

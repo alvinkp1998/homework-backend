@@ -7,10 +7,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      models.Join_classes.belongsTo(models.Classes);
-      models.Join_classes.hasMany(models.Join_classes);
-      models.Join_classes.belongsTo(models.Users);
+    static associate({ Join_classes, Classes, Presences, Users }) {
+      Join_classes.belongsTo(Classes);
+      Join_classes.hasMany(Presences);
+      Join_classes.belongsTo(Users);
     }
   }
   Join_classes.init(
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       id: { type: DataTypes.STRING(36), primaryKey: true },
       userId: DataTypes.STRING(36),
       classId: DataTypes.STRING(36),
-      role: DataTypes.ENUM("Student", "Tutor", "Facilitator"),
+      role: DataTypes.ENUM(["Student", "Tutor", "Facilitator"]),
     },
     {
       sequelize,
