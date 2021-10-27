@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const schedules = require("./schedules");
 module.exports = (sequelize, DataTypes) => {
   class Join_classes extends Model {
     /**
@@ -7,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Join_classes, Classes, Presences, Users }) {
+    static associate({ Join_classes, Classes, Schedules, Users }) {
       Join_classes.belongsTo(Classes);
-      Join_classes.hasMany(Presences);
+      Join_classes.belongsToMany(Schedules, { through: "Presences" });
       Join_classes.belongsTo(Users);
     }
   }
